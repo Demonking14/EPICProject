@@ -16,7 +16,7 @@ export const sendVerificationEmail = async (toEmail, token) => {
     return
   }
 
-  const verifyUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/verify-email/${token}`
+  const verifyUrl = `${process.env.FRONTEND_URL || 'https://agrimarket-lr8v.onrender.com'}/verify-email/${token}`
 
   const mailOptions = {
     from: `"AgriMarket Team" <${process.env.EMAIL_USER}>`,
