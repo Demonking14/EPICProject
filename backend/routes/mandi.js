@@ -4,11 +4,6 @@ import { fetchMandiPrices } from '../services/mandiService.js'
 
 const router = express.Router()
 
-/**
- * GET /api/mandi/prices
- * Query: state, district, commodity, limit, offset, pricePerKg (0|1)
- * Auth: required (farmer or buyer)
- */
 router.get('/prices', protect, async (req, res) => {
   try {
     const { state, district, commodity, limit, offset, pricePerKg } = req.query
@@ -31,12 +26,11 @@ router.get('/prices', protect, async (req, res) => {
 
 import { mspList, marketRates } from '../data/mspData.js'
 
-// GET /api/mandi/msp
+
 router.get('/msp', protect, (req, res) => {
   res.json(mspList)
 })
 
-// POST /api/mandi/compare-price
 router.post('/compare-price', protect, (req, res) => {
   try {
     const { crop, state, price } = req.body
@@ -47,12 +41,12 @@ router.post('/compare-price', protect, (req, res) => {
     const mspItem = mspList.find((item) => item.crop.toLowerCase().includes(crop.toLowerCase()))
     const msp = mspItem ? mspItem.price : 0
 
-    // Try to get avg market rate for state, fallback to global avg if needed or just random variance for demo
+ 
     let marketRate = 0
     if (state && marketRates[state] && marketRates[state][crop]) {
       marketRate = marketRates[state][crop]
     } else {
-      // Demo logic: average market rate is usually close to MSP (+/- 10%)
+     
       marketRate = msp > 0 ? msp + (Math.random() * 200 - 100) : Number(price)
     }
 

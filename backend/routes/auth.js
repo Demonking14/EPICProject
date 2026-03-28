@@ -8,7 +8,7 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' })
 }
 
-// POST /api/auth/register
+
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password, role } = req.body
@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
   }
 })
 
-// POST /api/auth/login
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body
@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
   }
 })
 
-// GET /api/auth/me (optional - verify token and return current user)
+
 router.get('/me', async (req, res) => {
   const auth = req.headers.authorization
   if (!auth?.startsWith('Bearer ')) {
@@ -71,7 +71,6 @@ router.get('/me', async (req, res) => {
   }
 })
 
-// PUT /api/auth/profile
 router.put('/profile', async (req, res) => {
   const auth = req.headers.authorization
   if (!auth || !auth.startsWith('Bearer ')) {
@@ -89,7 +88,7 @@ router.put('/profile', async (req, res) => {
 
     const { name, phone, age, gender, address } = req.body
 
-    // Update fields
+
     if (name) user.name = name
     if (phone) user.phone = phone
     if (age) user.age = age

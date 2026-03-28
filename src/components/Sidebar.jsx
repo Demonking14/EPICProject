@@ -37,7 +37,6 @@ function Sidebar({ userRole }) {
   return (
     <aside className="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform lg:translate-x-0">
       <div className="flex h-full flex-col border-r border-slate-200 bg-white/80 backdrop-blur-xl">
-        {/* Logo Area */}
         <div className="flex h-16 items-center border-b border-slate-100 px-6">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-600 text-white">
             <span className="font-bold">A</span>

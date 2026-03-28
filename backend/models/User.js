@@ -27,7 +27,7 @@ userSchema.methods.comparePassword = function (candidate) {
   return bcrypt.compare(candidate, this.password)
 }
 
-// Don't send password in JSON
+
 userSchema.methods.toJSON = function () {
   const obj = this.toObject()
   delete obj.password

@@ -86,7 +86,6 @@ function FarmerDashboard() {
   return (
     <Layout>
       <section className="space-y-6">
-        {/* Quick Stats */}
         <div className="grid gap-6 md:grid-cols-3">
           {statCards.map((card, index) => (
             <div

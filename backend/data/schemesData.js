@@ -1,11 +1,10 @@
-// Mock database of government schemes
 export const schemes = [
     {
         id: 1,
         name: 'PM-Kisan Samman Nidhi',
         description: 'Financial benefit of Rs. 6000/- per year in three equal installments to all landholding farmers families.',
-        state: 'All', // 'All' means central scheme
-        maxLandSize: 20, // Applicable for almost all, but let's say up to 20 acres for general
+        state: 'All',
+        maxLandSize: 20,
         link: 'https://pmkisan.gov.in/'
     },
     {
@@ -37,7 +36,7 @@ export const schemes = [
         name: 'Kalia Scheme',
         description: 'Financial assistance to cultivators and landless agricultural laborers.',
         state: 'Odisha',
-        maxLandSize: 5, // Small/Marginal farmers
+        maxLandSize: 5,
         link: 'https://kalia.odisha.gov.in/'
     },
     {

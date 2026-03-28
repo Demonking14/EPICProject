@@ -6,7 +6,7 @@ import { uploadProductImage } from '../middleware/upload.js'
 const router = express.Router()
 const baseUrl = process.env.BASE_URL || 'http://localhost:5000'
 
-// GET /api/products — list all (for marketplace); query: search, category
+
 router.get('/', async (req, res) => {
   try {
     const { search, category } = req.query
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-// GET /api/products/my — my products (farmer only)
+
 router.get('/my', protect, farmerOnly, async (req, res) => {
   try {
     const products = await Product.find({ farmer: req.user._id })
@@ -47,7 +47,7 @@ router.get('/my', protect, farmerOnly, async (req, res) => {
   }
 })
 
-// POST /api/products — create (farmer only, with optional image)
+
 router.post('/', protect, farmerOnly, (req, res, next) => {
   uploadProductImage(req, res, async (err) => {
     if (err) {
@@ -78,7 +78,7 @@ router.post('/', protect, farmerOnly, (req, res, next) => {
   })
 })
 
-// GET /api/products/:id — single product
+
 router.get('/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id).populate('farmer', 'name email').lean()
@@ -92,7 +92,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// PUT /api/products/:id — update (farmer, own only)
+
 router.put('/:id', protect, farmerOnly, async (req, res) => {
   try {
     const product = await Product.findOne({ _id: req.params.id, farmer: req.user._id })
@@ -113,7 +113,6 @@ router.put('/:id', protect, farmerOnly, async (req, res) => {
   }
 })
 
-// DELETE /api/products/:id — delete (farmer, own only)
 router.delete('/:id', protect, farmerOnly, async (req, res) => {
   try {
     const product = await Product.findOneAndDelete({ _id: req.params.id, farmer: req.user._id })

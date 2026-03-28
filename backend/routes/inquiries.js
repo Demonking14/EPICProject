@@ -6,7 +6,7 @@ import { protect, buyerOnly } from '../middleware/auth.js'
 
 const router = express.Router()
 
-// POST /api/inquiries — buyer requests a lot
+
 router.post('/', protect, buyerOnly, async (req, res) => {
   try {
     const { productId, message } = req.body
@@ -25,7 +25,7 @@ router.post('/', protect, buyerOnly, async (req, res) => {
   }
 })
 
-// GET /api/inquiries/my — my inquiries (buyer) or inquiries on my products (farmer)
+
 router.get('/my', protect, async (req, res) => {
   try {
     if (req.user.role === 'buyer') {
@@ -48,7 +48,6 @@ router.get('/my', protect, async (req, res) => {
   }
 })
 
-// GET /api/inquiries/:id — single inquiry (participant only)
 router.get('/:id', protect, async (req, res) => {
   try {
     const inquiry = await Inquiry.findById(req.params.id)
@@ -65,7 +64,7 @@ router.get('/:id', protect, async (req, res) => {
   }
 })
 
-// PUT /api/inquiries/:id — farmer accept/reject
+
 router.put('/:id', protect, async (req, res) => {
   try {
     const { status } = req.body
@@ -87,7 +86,6 @@ router.put('/:id', protect, async (req, res) => {
   }
 })
 
-// GET /api/inquiries/:id/messages — chat history (participant only)
 router.get('/:id/messages', protect, async (req, res) => {
   try {
     const inquiry = await Inquiry.findById(req.params.id)

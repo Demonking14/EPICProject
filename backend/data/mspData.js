@@ -21,11 +21,11 @@ export const mspList = [
     { crop: 'Jute', year: '2023-24', price: 5050 }
 ]
 
-// Mock average market prices for comparison if real API fails
+
 export const marketRates = {
     Punjab: { Wheat: 2300, Paddy: 2200, Maize: 2100 },
     Haryana: { Wheat: 2290, Paddy: 2190, Maize: 2150 },
-    up: { Wheat: 2250, Paddy: 2100, Maize: 2000 }, // Uttar Pradesh
-    mp: { Wheat: 2200, Paddy: 2050, Maize: 1950 }, // Madhya Pradesh
+    up: { Wheat: 2250, Paddy: 2100, Maize: 2000 }, 
+    mp: { Wheat: 2200, Paddy: 2050, Maize: 1950 }, 
     Maharashtra: { Jowar: 3200, Cotton: 6800, Soybean: 4500 }
 }

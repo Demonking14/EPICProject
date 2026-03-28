@@ -33,7 +33,6 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-[#022c22] text-white selection:bg-green-500 selection:text-white overflow-x-hidden">
-      {/* Dynamic Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-green-500/10 blur-[150px] rounded-full" />

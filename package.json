@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "start": "node backend/server.js",
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm install --prefix backend && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

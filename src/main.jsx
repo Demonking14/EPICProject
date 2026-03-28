@@ -5,7 +5,6 @@ import { initializeDemoUsers } from "./utils/auth";
 import "./i18n";
 import "./index.css";
 
-// Initialize demo users when app starts
 initializeDemoUsers();
 
 ReactDOM.createRoot(document.getElementById("root")).render(

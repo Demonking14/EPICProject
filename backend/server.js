@@ -37,6 +37,16 @@ app.get('/api/health', (req, res) => {
   res.json({ ok: true, message: 'AgriMarket API is running.' })
 })
 
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  const frontendDist = path.join(__dirname, '..', 'dist')
+  app.use(express.static(frontendDist))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendDist, 'index.html'))
+  })
+}
+
 app.use((err, req, res, next) => {
   console.error(err)
   res.status(500).json({ message: err.message || 'Server error.' })

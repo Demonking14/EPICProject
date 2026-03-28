@@ -1,8 +1,3 @@
-/**
- * Fetches daily mandi (AGMARKNET) price data from data.gov.in.
- * Schema: State, District, Market, Commodity, Variety, Arrival_Date, Min_Price, Max_Price, Modal_Price (per quintal).
- * Optional: return price per kg (Modal_Price / 100).
- */
 
 const DEFAULT_BASE_URL = 'https://api.data.gov.in/resource/9ef84268-d583-465a-a3a6-9f566f4a0f2a'
 
@@ -23,9 +18,7 @@ function toNum (v) {
   return Number.isFinite(n) ? n : null
 }
 
-/**
- * Normalize a raw record to standard schema (State, District, Market, Commodity, Variety, Arrival_Date, Min_Price, Max_Price, Modal_Price).
- */
+
 function normalizeRecord (raw) {
   const state = get('state', raw) ?? get('State', raw) ?? ''
   const district = get('district', raw) ?? get('District', raw) ?? ''
@@ -51,16 +44,7 @@ function normalizeRecord (raw) {
   }
 }
 
-/**
- * Fetch mandi prices from the external API.
- * @param {object} options
- * @param {string} [options.state] - Filter by state name
- * @param {string} [options.district] - Filter by district
- * @param {string} [options.commodity] - Filter by commodity
- * @param {number} [options.limit=100] - Max records
- * @param {number} [options.offset=0] - Offset for pagination
- * @param {boolean} [options.pricePerKg=true] - Include modal_price_per_kg in each record
- */
+
 export async function fetchMandiPrices (options = {}) {
   const apiKey = process.env.MANDI_API_KEY?.trim()
   if (!apiKey) {
@@ -84,7 +68,7 @@ export async function fetchMandiPrices (options = {}) {
   params.set('limit', String(limit))
   params.set('offset', String(offset))
 
-  // Some data.gov.in APIs support filter params
+  
   if (options.state?.trim()) params.set('filters[state]', options.state.trim())
   if (options.district?.trim()) params.set('filters[district]', options.district.trim())
   if (options.commodity?.trim()) params.set('filters[commodity]', options.commodity.trim())
@@ -96,7 +80,7 @@ export async function fetchMandiPrices (options = {}) {
     res = await fetch(url, { headers: { 'Accept': 'application/json' } })
     const text = await res.text()
 
-    // data.gov.in often returns HTML error pages instead of JSON on auth failure
+    
     if (text.trim().startsWith('<')) {
       return {
         records: [],
@@ -117,7 +101,7 @@ export async function fetchMandiPrices (options = {}) {
       throw new Error(`Failed to parse Mandi API response: ${text.slice(0, 100)}...`)
     }
 
-    // Check for API-specific error structure (sometimes 200 OK but contains error message)
+   
     if (data.message && !data.records) {
        throw new Error(`Mandi API Error: ${data.message}`)
     }
@@ -140,7 +124,6 @@ export async function fetchMandiPrices (options = {}) {
   const rawRecords = Array.isArray(data?.records) ? data.records : Array.isArray(data?.data) ? data.data : Array.isArray(data) ? data : []
   let normalized = rawRecords.map((r) => normalizeRecord(r))
 
-  // Client-side filter if API doesn't support filters (case-insensitive)
   const state = options.state?.trim()?.toLowerCase()
   const district = options.district?.trim()?.toLowerCase()
   const commodity = options.commodity?.trim()?.toLowerCase()

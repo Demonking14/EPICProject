@@ -27,7 +27,7 @@ try {
 const PORT = 5003;
 httpServer.listen(PORT, () => {
     console.log(`Debug server listening on port ${PORT}`);
-    // Close after 2 seconds
+   
     setTimeout(() => {
         console.log('Closing debug server...');
         httpServer.close(() => {
