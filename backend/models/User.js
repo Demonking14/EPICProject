@@ -12,7 +12,10 @@ const userSchema = new mongoose.Schema(
     gender: { type: String, enum: ['Male', 'Female', 'Other'] },
     address: { type: String, trim: true },
     rating: { type: Number, default: 0 },
-    ratingCount: { type: Number, default: 0 }
+    ratingCount: { type: Number, default: 0 },
+    isVerified: { type: Boolean, default: false },
+    verificationToken: { type: String },
+    verificationTokenExpires: { type: Date }
   },
   { timestamps: true }
 )

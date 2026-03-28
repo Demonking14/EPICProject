@@ -13,21 +13,40 @@ function Signup() {
   const [password, setPassword] = useState('')
   const [role, setRole] = useState('farmer')
   const [error, setError] = useState('')
+  const [successMsg, setSuccessMsg] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleSignup = async (e) => {
     e.preventDefault()
     setError('')
+    setSuccessMsg('')
     setLoading(true)
     try {
-      await register({ name, email, password, role })
-      navigate(role === 'farmer' ? '/farmer-dashboard' : '/buyer-marketplace')
+      const msg = await register({ name, email, password, role })
+      setSuccessMsg(msg)
     } catch (err) {
       setError(err.message || 'Sign up failed. Please try again.')
     } finally {
       setLoading(false)
     }
+  }
+
+  if (successMsg) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-950 px-4">
+        <div className="max-w-md w-full p-8 rounded-3xl bg-white shadow-xl text-center">
+          <div className="w-16 h-16 mx-auto bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-6">
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Check your inbox</h2>
+          <p className="text-slate-600 mb-8">{successMsg}</p>
+          <Link to="/login" className="btn-primary w-full inline-block text-center py-3">Return to login</Link>
+        </div>
+      </div>
+    )
   }
 
   return (

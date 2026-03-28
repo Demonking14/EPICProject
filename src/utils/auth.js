@@ -21,13 +21,11 @@ export async function login(email, password) {
 }
 
 export async function register({ name, email, password, role }) {
-  const { user, token } = await api('/api/auth/register', {
+  const res = await api('/api/auth/register', {
     method: 'POST',
     body: { name, email: email.trim(), password, role }
   })
-  localStorage.setItem('token', token)
-  localStorage.setItem('user', JSON.stringify(user))
-  return user
+  return res.message
 }
 
 export function logout() {

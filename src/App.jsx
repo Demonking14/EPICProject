@@ -17,6 +17,7 @@ import Profile from "./pages/Profile";
 import MSPTool from "./pages/MSPTool";
 import SubsidyTracker from "./pages/SubsidyTracker";
 import ProtectedRoute from "./components/ProtectedRoute";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/verify-email/:token" element={<VerifyEmail />} />
         <Route
           path="/buyer-marketplace"
           element={
