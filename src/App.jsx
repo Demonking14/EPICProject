@@ -18,6 +18,7 @@ import MSPTool from "./pages/MSPTool";
 import SubsidyTracker from "./pages/SubsidyTracker";
 import ProtectedRoute from "./components/ProtectedRoute";
 import VerifyEmail from "./pages/VerifyEmail";
+import Chatbot from "./components/Chatbot";
 
 function App() {
   return (
@@ -101,6 +102,7 @@ function App() {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <Chatbot />
     </Router>
   );
 }

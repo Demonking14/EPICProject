@@ -11,6 +11,7 @@ import productRoutes from './routes/products.js'
 import inquiryRoutes from './routes/inquiries.js'
 import mandiRoutes from './routes/mandi.js'
 import schemeRoutes from './routes/schemes.js'
+import chatbotRoutes from './routes/chatbot.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -32,6 +33,7 @@ app.use('/api/products', productRoutes)
 app.use('/api/inquiries', inquiryRoutes)
 app.use('/api/mandi', mandiRoutes)
 app.use('/api/schemes', schemeRoutes)
+app.use('/api/chat', chatbotRoutes)
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, message: 'AgriMarket API is running.' })
